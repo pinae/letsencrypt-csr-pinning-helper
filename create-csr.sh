@@ -15,19 +15,13 @@ echo "City? [Berlin]"
 read City
 echo "Organization name? [${1}]"
 read Organization
-if [ "${Organization:-0}" ]; then
-    Organization=${1}
-fi
+Organization=${Organization:=${1}}
 echo "Organization unit? [${1}-Webmaster]"
 read Organization_Unit
-if [ "${Organization:-0}" ]; then
-    Organization_Unit=${1}"-Webmaster"
-fi
+Organization_Unit=${Organization_Unit:=${1}"-Webmaster"}
 echo "Webmaster Email? [webmaster@${1}]"
 read Email
-if [ "${Email:-0}" ]; then
-    Email="webmaster@"${1}
-fi
+Email=${Email:="webmaster@"${1}}
 DNSNames=""
 for ((i=1;i <= $#;i++))
 {
