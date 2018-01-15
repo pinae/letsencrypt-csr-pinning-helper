@@ -26,7 +26,10 @@ DNSNames=""
 for ((i=1;i <= $#;i++))
 {
     eval domain_name=\$$i
-    DNSNames=${DNSNames}"DNS."${i}" = "${domain_name}$'\n'
+    DNSNames=${DNSNames}"DNS."${i}" = "${domain_name}
+    if [ ${i} -lt $# ]; then
+        DNSNames=${DNSNames}$'\n'
+    fi
 }
 
 openssl req -new -sha256 -nodes -out ${1}.csr -newkey rsa:${key_size} -days ${days} -keyout ${1}.key -config <(
