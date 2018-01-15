@@ -31,6 +31,8 @@ for ((i=1;i <= $#;i++))
         DNSNames=${DNSNames}$'\n'
     fi
 }
+DNSNames="$(echo -e "${DNSNames}" | sed -e 's/[[:space:]]*$//')"
+echo -e "${DNSNames}"
 
 openssl req -new -sha256 -nodes -out ${1}.csr -newkey rsa:${key_size} -days ${days} -keyout ${1}.key -config <(
 cat <<-EOF
